@@ -1,6 +1,6 @@
 produits = {1: (1, "Lait", 2.5), 2: (2, "Eau", 2.0), 3: (3, "Chocolat", 1.5), 4: (4, "Beurre", 4.5)}
-cabas = {1: 0, 2: 0, 3: 0, 4: 0}
-ca = {"Lait": 0, "Eau": 0, "Chocolat": 0, 'Beurre': 0}
+cabas = {x: 0 for x in produits.keys()}
+ca = {x[1]: 0 for x in produits.values()}
 
 run = True
 while run:
@@ -21,9 +21,10 @@ while run:
             else:
                 x = -1
                 total = 0
+                print("\n\n\t\x1b[6;30;42mVotre Ticket de Caisse\x1b[0m")
                 for j in cabas.items():
                     if j[1] != 0:
-                        print(j[0], produits[j[0]][1], "quantité ", j[1], "total=", j[1] * produits[j[0]][2])
+                        print(j[0], produits[j[0]][1], "quantité", j[1], "total=", j[1] * produits[j[0]][2])
                         ca[produits[j[0]][1]] += j[1] * produits[j[0]][2]
                         total += j[1] * produits[j[0]][2]
                 print("\t\t*****Total:", total, "€")
@@ -31,7 +32,7 @@ while run:
     elif choix == 2:
         catot = 0
         for id, item in enumerate(ca.items()):
-            print(id +1, item[0], ":", item[1], "euros")
+            print(id + 1, item[0], ":", item[1], "euros")
             catot += item[1]
         print("CA total", catot, "€")
 
