@@ -12,4 +12,4 @@ def pprint(pascal):
     for i in pascal:
         print(i)
 
-pprint(pascal(100))
+pprint(pascal(10))

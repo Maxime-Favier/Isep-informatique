@@ -2,6 +2,19 @@ eleves = []
 classesverif = ["A1", "A2", "A3", "P1", "P2", "I1", "I2"]
 groupesverif = ["T1", "T2", "T3", "T4", "T5"]
 
+
+def tri(T):
+    n = len(T)
+    for j in range(0, len(T) - 1):
+        indiceMin = j
+        for k in range(j + 1, len(T)):
+            if T[k]["id"] < T[indiceMin]["id"]:
+                indiceMin = k
+        if indiceMin != j:
+            T[j], T[indiceMin] = T[indiceMin], T[j]
+    return T
+
+
 run = True
 while run:
     print("\n\n\t\t\x1b[6;30;42mMENU\x1b[0m")
@@ -20,9 +33,11 @@ while run:
         prenom = input("\tPrénom de l'élève")
         classe = input("\tClasse de l'élève")
         groupe = input("\tGroupe de l'élève")
-        id = input("\t Numéro de l'élève")
+        id = int(input("\t Numéro de l'élève"))
         if classe in classesverif and groupe in groupesverif:
             eleves.append({"id": id, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe})
+            eleves = tri(eleves)
+            # print(eleves)
             print("\t\t\x1b[6;30;42mélève ajouté\x1b[0m")
         else:
             print("\t\t\033[91mInformations incorrectes\033[0m", "\n")
@@ -41,6 +56,7 @@ while run:
         idmo = int(input("\t Numéro de l'élève (" + eleves[modifid]["id"] + ")"))
         if classe in classesverif and groupe in groupesverif:
             eleves[modifid] = {"id": idmo, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe}
+            eleves = tri(eleves)
             print("\t\t\x1b[6;30;42mélève ajouté\x1b[0m")
         else:
             print("\t\t\033[91mInformations incorrectes\033[0m", "\n")

@@ -2,6 +2,27 @@ eleves = []
 classesverif = ["A1", "A2", "A3", "P1", "P2", "I1", "I2"]
 groupesverif = ["T1", "T2", "T3", "T4", "T5"]
 
+
+def tri(T):
+    n = len(T)
+    for j in range(0, len(T) - 1):
+        indiceMin = j
+        for k in range(j + 1, len(T)):
+            if T[k]["id"] < T[indiceMin]["id"]:
+                indiceMin = k
+        if indiceMin != j:
+            T[j], T[indiceMin] = T[indiceMin], T[j]
+    return T
+
+
+
+with open("eleves.csv", "r") as file:
+    # {"id": idmo, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe}
+    for line in file:
+        id, nom, prenom, classe, groupe = line.split(";")
+        eleves.append({"id": id, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe})
+
+
 run = True
 while run:
     print("\n\n\t\t\x1b[6;30;42mMENU\x1b[0m")
@@ -10,8 +31,12 @@ while run:
           "\t3 - Supprimer un élève\n"
           "\t4 - Liste d'élèves d'une classe\n"
           "\t5 - Liste d'élèves d'un groupe d'une classe\n"
-          "\t6 - Quitter")
-    choix = int(input("Votre Choix? "))
+          "\t6 - Sauvegarder et Quitter")
+    try:
+        choix = int(input("Votre Choix? "))
+    except ValueError:
+        print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
+        continue
 
     if choix == 1:
         # Création d'un élève
@@ -20,9 +45,15 @@ while run:
         prenom = input("\tPrénom de l'élève")
         classe = input("\tClasse de l'élève")
         groupe = input("\tGroupe de l'élève")
-        id = input("\t Numéro de l'élève")
+        try:
+            id = int(input("\t Numéro de l'élève"))
+        except ValueError:
+            print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
+            continue
         if classe in classesverif and groupe in groupesverif:
             eleves.append({"id": id, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe})
+            eleves = tri(eleves)
+            # print(eleves)
             print("\t\t\x1b[6;30;42mélève ajouté\x1b[0m")
         else:
             print("\t\t\033[91mInformations incorrectes\033[0m", "\n")
@@ -33,14 +64,23 @@ while run:
         print("\t\t\x1b[6;30;42mModifier élève\x1b[0m")
         for id, eleve in enumerate(eleves):
             print(id, "-", eleve["id"], eleve["nom"], eleve["prenom"], eleve["classe"], eleve["groupe"])
-        modifid = int(input("\tnum de l'élève à modifier? "))
+        try:
+            modifid = int(input("\tnum de l'élève à modifier? "))
+        except ValueError:
+            print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
+            continue
         nom = input("\tNom de l'élève (" + eleves[modifid]["nom"] + ") ")
         prenom = input("\tPrénom de l'élève (" + eleves[modifid]["prenom"] + ") ")
         classe = input("\tClasse de l'élève (" + eleves[modifid]["classe"] + ") ")
         groupe = input("\tGroupe de l'élève (" + eleves[modifid]["groupe"] + ") ")
-        idmo = int(input("\t Numéro de l'élève (" + eleves[modifid]["id"] + ")"))
+        try:
+            idmo = int(input("\t Numéro de l'élève (" + eleves[modifid]["id"] + ")"))
+        except ValueError:
+            print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
+            continue
         if classe in classesverif and groupe in groupesverif:
             eleves[modifid] = {"id": idmo, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe}
+            eleves = tri(eleves)
             print("\t\t\x1b[6;30;42mélève ajouté\x1b[0m")
         else:
             print("\t\t\033[91mInformations incorrectes\033[0m", "\n")
@@ -51,7 +91,11 @@ while run:
         print("\t\t\x1b[6;30;42mModifier élève\x1b[0m")
         for id, eleve in enumerate(eleves):
             print(id, "-", eleve["id"], eleve["nom"], eleve["prenom"], eleve["classe"], eleve["groupe"])
-        supprid = int(input("\tnum de l'élève à supprimer? "))
+        try:
+            supprid = int(input("\tnum de l'élève à supprimer? "))
+        except ValueError:
+            print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
+            continue
         del eleves[supprid]
 
     elif choix == 4:
@@ -83,3 +127,9 @@ while run:
 
     else:
         run = False
+        with open('eleves.csv', "w") as file:
+            for eleve in eleves:
+                file.write(str(
+                    eleve["id"]) + ";"+ eleve["nom"] + ";" +eleve["prenom"] + ";"
+                           + eleve["classe"] + ";" + eleve["groupe"]+"\n")
+        print("\x1b[6;30;42mFichier sauvegardé!\x1b[0m")
