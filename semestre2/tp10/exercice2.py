@@ -38,7 +38,7 @@ while run:
         classe = input("\tClasse de l'élève")
         groupe = input("\tGroupe de l'élève")
         try:
-            id = int(input("\t Numéro de l'élève"))
+            id = int(input("\tNuméro de l'élève"))
         except ValueError:
             print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
             continue

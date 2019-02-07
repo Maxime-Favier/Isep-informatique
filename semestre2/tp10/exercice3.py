@@ -15,13 +15,13 @@ def tri(T):
     return T
 
 
-
-with open("eleves.csv", "r") as file:
-    # {"id": idmo, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe}
-    for line in file:
-        id, nom, prenom, classe, groupe = line.split(";")
-        eleves.append({"id": id, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe})
-
+try:
+    with open("eleves.csv", "r") as file:
+        for line in file:
+            id, nom, prenom, classe, groupe = line.split(";")
+            eleves.append({"id": id, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe})
+except FileNotFoundError:
+    pass
 
 run = True
 while run:
@@ -74,7 +74,7 @@ while run:
         classe = input("\tClasse de l'élève (" + eleves[modifid]["classe"] + ") ")
         groupe = input("\tGroupe de l'élève (" + eleves[modifid]["groupe"] + ") ")
         try:
-            idmo = int(input("\t Numéro de l'élève (" + eleves[modifid]["id"] + ")"))
+            idmo = int(input("\tNuméro de l'élève (" + eleves[modifid]["id"] + ")"))
         except ValueError:
             print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
             continue

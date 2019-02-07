@@ -66,7 +66,7 @@ while run:
         classe = input("\tClasse de l'élève (" + eleves[modifid]["classe"] + ") ")
         groupe = input("\tGroupe de l'élève (" + eleves[modifid]["groupe"] + ") ")
         try:
-            idmo = int(input("\t Numéro de l'élève (" + eleves[modifid]["id"] + ")"))
+            idmo = int(input("\tNuméro de l'élève (" + eleves[modifid]["id"] + ")"))
         except ValueError:
             print("\t\t\033[91mEntrez un chiffre\033[0m", "\n")
             continue

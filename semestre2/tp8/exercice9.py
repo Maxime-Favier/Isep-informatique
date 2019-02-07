@@ -38,7 +38,7 @@ while run:
         prenom = input("\tPrénom de l'élève (" + eleves[modifid]["prenom"] + ") ")
         classe = input("\tClasse de l'élève (" + eleves[modifid]["classe"] + ") ")
         groupe = input("\tGroupe de l'élève (" + eleves[modifid]["groupe"] + ") ")
-        idmo = int(input("\t Numéro de l'élève (" + eleves[modifid]["id"] + ")"))
+        idmo = int(input("\tNuméro de l'élève (" + eleves[modifid]["id"] + ") "))
         if classe in classesverif and groupe in groupesverif:
             eleves[modifid] = {"id": idmo, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe}
             print("\t\t\x1b[6;30;42mélève ajouté\x1b[0m")

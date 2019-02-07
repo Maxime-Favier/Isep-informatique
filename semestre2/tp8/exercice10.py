@@ -33,7 +33,7 @@ while run:
         prenom = input("\tPrénom de l'élève")
         classe = input("\tClasse de l'élève")
         groupe = input("\tGroupe de l'élève")
-        id = int(input("\t Numéro de l'élève"))
+        id = int(input("\tNuméro de l'élève"))
         if classe in classesverif and groupe in groupesverif:
             eleves.append({"id": id, "nom": nom, "prenom": prenom, "classe": classe, "groupe": groupe})
             eleves = tri(eleves)
