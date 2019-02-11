@@ -19,7 +19,7 @@ while run:
         try:
             with open(file, "r")as file:
                 for line in file:
-                    texte.append(line.replace("\n",""))
+                    texte.append(line.replace("\n", ""))
         except FileNotFoundError:
             print("\t\t\033[91mLe fichier n'existe pas\033[0m", "\n")
             continue
