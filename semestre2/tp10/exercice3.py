@@ -130,6 +130,6 @@ while run:
         with open('eleves.csv', "w") as file:
             for eleve in eleves:
                 file.write(str(
-                    eleve["id"]) + ";"+ eleve["nom"] + ";" +eleve["prenom"] + ";"
-                           + eleve["classe"] + ";" + eleve["groupe"]+"\n")
+                    eleve["id"]) + ";" + eleve["nom"] + ";" + eleve["prenom"] + ";"
+                           + eleve["classe"] + ";" + eleve["groupe"] + "\n")
         print("\x1b[6;30;42mFichier sauvegardé!\x1b[0m")
