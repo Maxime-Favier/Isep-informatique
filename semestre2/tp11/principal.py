@@ -1,3 +1,4 @@
-from utils.operations import mafonction
+from utils.operations import *
 
 print(mafonction())
+autrefonction()

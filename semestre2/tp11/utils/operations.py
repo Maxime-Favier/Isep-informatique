@@ -3,3 +3,7 @@
 def mafonction():
     print("export ok")
     return True
+
+def autrefonction():
+    print("une autre fonction")
+
